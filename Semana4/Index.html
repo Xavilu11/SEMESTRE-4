@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harta Pinta - Arte y Diseño</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- CSS propio -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">
+        Harta Pinta
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Galería</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Servicios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Encabezado con logo -->
+  <header class="text-center my-5">
+    <img src="assets/img/Logo harta pinta.jpg" alt="Logo harta pinta" width="120" class="mb-3 rounded-circle shadow">
+    <h1 class="fw-bold">Bienvenido a Harta Pinta</h1>
+    <p class="lead">
+      Arte, diseño y creatividad desde Quito para el mundo<br>
+      Porque en Ecuador, tener Harta Pinta, es tener Harta Presencia
+    </p>
+  </header>
+
+  <!-- Sección Principal -->
+  <section class="container">
+    <div class="row">
+      <!-- Diseño Gráfico -->
+      <div class="col-md-4">
+        <div class="card shadow-sm text-center">
+          <div class="card-body">
+            <i class="bi bi-palette display-4 text-primary"></i>
+            <h3 class="card-title mt-3">Diseño Gráfico</h3>
+            <p class="card-text">Creamos piezas visuales únicas para tu marca con estilo moderno y atractivo.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Arte Digital -->
+      <div class="col-md-4">
+        <div class="card shadow-sm text-center">
+          <div class="card-body">
+            <i class="bi bi-brush display-4 text-success"></i>
+            <h3 class="card-title mt-3">Arte Digital</h3>
+            <p class="card-text">Ilustraciones y composiciones digitales que transmiten emociones y creatividad.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Branding -->
+      <div class="col-md-4">
+        <div class="card shadow-sm text-center">
+          <div class="card-body">
+            <i class="bi bi-tag display-4 text-warning"></i>
+            <h3 class="card-title mt-3">Branding</h3>
+            <p class="card-text">Construimos identidades visuales que reflejan la esencia de tu negocio.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulario -->
+  <section class="container my-5">
+    <h2 class="text-center mb-4">Contáctanos</h2>
+    <form>
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" placeholder="Harta Pinta">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo electrónico</label>
+        <input type="email" class="form-control" id="email" placeholder="hartapintatienda@gmail.com">
+      </div>
+      <div class="mb-3">
+        <label for="comentarios" class="form-label">Comentarios</label>
+        <textarea class="form-control" id="comentarios" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+  </section>
+
+  <!-- Collapse -->
+  <section class="container my-5">
+    <p>
+      <a class="btn btn-secondary" data-bs-toggle="collapse" href="#infoExtra" role="button">
+        Conoce más sobre Harta Pinta
+      </a>
+    </p>
+    <div class="collapse" id="infoExtra">
+      <div class="card card-body">
+        Harta Pinta es un emprendimiento creativo que fusiona arte y tecnología para dar vida a ideas increíbles.
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-light text-center py-3">
+    <p>&copy; 2025 Harta Pinta | 
+      <a href="#"><i class="bi bi-tiktok"></i> TikTok</a> | 
+      <a href="#"><i class="bi bi-facebook"></i> Facebook</a> | 
+      <a href="#"><i class="bi bi-envelope-fill"></i> Email</a>
+    </p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
