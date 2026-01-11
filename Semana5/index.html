@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galería Interactiva</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Galería Interactiva</h1>
+
+  <div class="controls">
+    <!-- Opción 1: agregar imagen desde URL -->
+    <input type="url" id="imageUrl" placeholder="Ingresa la URL de la imagen" />
+    <button id="addImageUrlBtn">Agregar Imagen desde URL</button>
+
+    <!-- Opción 2: subir imagen desde PC -->
+    <input type="file" id="imageFile" accept="image/*" />
+    <button id="addImageFileBtn">Agregar Imagen desde PC</button>
+
+    <!-- Eliminar imagen seleccionada -->
+    <button id="deleteImageBtn">Eliminar Imagen Seleccionada</button>
+  </div>
+
+  <div id="gallery" class="gallery"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
