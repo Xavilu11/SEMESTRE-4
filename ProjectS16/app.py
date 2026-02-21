@@ -1,31 +1,16 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 # Página principal
 @app.route('/')
-def inicio():
-    return "Bienvenido a Harta Pinta – Tu espacio creativo"
+def index():
+    return render_template("index.html")
 
-# Ruta dinámica para productos
-@app.route('/producto/<nombre>')
-def producto(nombre):
-    return f"Producto: {nombre} – disponible en Harta Pinta."
-
-# Catálogo general
-@app.route('/catalogo')
-def catalogo():
-    return "Catálogo de Harta Pinta – Explora nuestras colecciones."
-
-# Ofertas dinámicas
-@app.route('/oferta/<codigo>')
-def oferta(codigo):
-    return f"Oferta especial {codigo} – válida en Harta Pinta."
-
-# Contacto
-@app.route('/contacto')
-def contacto():
-    return "Contáctanos en Harta Pinta – Estamos aquí para ayudarte."
+# Página "Acerca de"
+@app.route('/about')
+def about():
+    return render_template("about.html")
 
 if __name__ == '__main__':
     import os
