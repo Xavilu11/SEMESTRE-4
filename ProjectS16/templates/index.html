@@ -18,11 +18,11 @@
       </tr>
       {% for producto in productos %}
       <tr>
-          <td>{{ producto[0] }}</td>
-          <td>{{ producto[1] }}</td>
-          <td>{{ producto[2] }}</td>
-          <td>{{ producto[3] }}</td>
-          <td>{{ producto[4] }}</td>
+          <td>{{ producto.id }}</td>
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.color }}</td>
+          <td>{{ producto.cantidad }}</td>
+          <td>{{ producto.precio }}</td>
       </tr>
       {% endfor %}
   </table>

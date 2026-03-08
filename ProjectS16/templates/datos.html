@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Datos - Harta Pinta{% endblock %}
+
+{% block content %}
+  <h2>Productos desde {{ formato }}</h2>
+  <table border="1" cellpadding="5" cellspacing="0">
+      <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Color</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+      </tr>
+      {% for producto in productos %}
+      <tr>
+          <td>{{ producto[0] }}</td>
+          <td>{{ producto[1] }}</td>
+          <td>{{ producto[2] }}</td>
+          <td>{{ producto[3] }}</td>
+          <td>{{ producto[4] }}</td>
+      </tr>
+      {% endfor %}
+  </table>
+{% endblock %}
