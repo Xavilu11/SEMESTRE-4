@@ -5,7 +5,7 @@ from sqlalchemy.orm import declarative_base
 # Declarative Base
 Base = declarative_base()
 
-# Clase Producto como modelo ORM
+# Clase Producto como modelo ORM, define la estructura de la Tabla.
 class Producto(Base):
     __tablename__ = "productos"
 

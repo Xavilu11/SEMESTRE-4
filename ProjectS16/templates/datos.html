@@ -12,8 +12,9 @@
           <th>Cantidad</th>
           <th>Precio</th>
       </tr>
-      {% for producto in productos %}
+      {% for producto in productos %} 
       <tr>
+        # Se usa Jinja2 para iterar sobre los productos obtenidos desde la consulta SQL directa #
           <td>{{ producto[0] }}</td>
           <td>{{ producto[1] }}</td>
           <td>{{ producto[2] }}</td>
