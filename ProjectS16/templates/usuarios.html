@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Usuarios</title>
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+
+    <!-- Tabla para mostrar usuarios -->
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Mail</th>
+            <th>Password</th>
+        </tr>
+        {% for u in usuarios %}
+        <tr>
+            <td>{{ u.id_usuario }}</td>
+            <td>{{ u.nombre }}</td>
+            <td>{{ u.mail }}</td>
+            <td>{{ u.password }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Formulario para agregar usuarios -->
+    <h2>Agregar Usuario</h2>
+    <form action="{{ url_for('add_usuario') }}" method="POST">
+        <label>Nombre:</label>
+        <input type="text" name="nombre" required><br>
+        <label>Mail:</label>
+        <input type="email" name="mail" required><br>
+        <label>Password:</label>
+        <input type="password" name="password" required><br>
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+</html>
