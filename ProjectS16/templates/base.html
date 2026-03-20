@@ -12,9 +12,28 @@
       <ul class="nav">
         <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('index') }}">Inicio</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('about') }}">About</a></li>
+        {% if current_user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('logout') }}">Cerrar sesión</a></li>
+        {% else %}
+          <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('login') }}">Login</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('register') }}">Registro</a></li>
+        {% endif %}
       </ul>
     </nav>
   </header>
+
+  <!-- Bloque para mostrar mensajes flash -->
+  <section>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flash-messages">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </section>
 
   <main>
     {% block content %}{% endblock %}
