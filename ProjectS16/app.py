@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, send_file
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -7,6 +7,7 @@ from models.producto import Producto
 from models.usuario import Usuario
 from services.producto_service import listar_productos, obtener_producto, crear_producto, actualizar_producto, eliminar_producto
 from services.usuario_service import listar_usuarios, obtener_usuario, crear_usuario, actualizar_usuario, eliminar_usuario
+from services.reporte_service import generar_reporte_productos
 from forms.producto_form import ProductoForm
 
 app = Flask(__name__)
@@ -75,6 +76,16 @@ def eliminar_producto_view(id):
     eliminar_producto(id)
     flash("Producto eliminado correctamente")
     return redirect(url_for("listar_productos_view"))
+
+# -------------------------------
+# Reporte PDF
+# -------------------------------
+@app.route('/reporte/productos')
+@login_required
+def reporte_productos():
+    archivo = generar_reporte_productos()
+    flash("Reporte generado correctamente")
+    return send_file(archivo, as_attachment=True)
 
 # -------------------------------
 # CRUD Usuarios
