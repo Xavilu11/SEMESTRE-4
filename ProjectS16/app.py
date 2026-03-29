@@ -1,5 +1,8 @@
+# -------------------------------
+# Importaciones principales
+# -------------------------------
 from flask import Flask, render_template, request, redirect, url_for, flash, send_file
-from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from flask_login import LoginManager, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # Importamos modelos y servicios
@@ -8,20 +11,23 @@ from models.usuario import Usuario
 from services.producto_service import listar_productos, obtener_producto, crear_producto, actualizar_producto, eliminar_producto
 from services.usuario_service import listar_usuarios, obtener_usuario, crear_usuario, actualizar_usuario, eliminar_usuario
 from services.reporte_service import generar_reporte_productos
-from forms.producto_form import ProductoForm
 
+# -------------------------------
+# Configuración de la aplicación
+# -------------------------------
 app = Flask(__name__)
-app.secret_key = "clave_secreta_super_segura"
+app.secret_key = "clave_secreta_super_segura"  # Necesaria para sesiones y mensajes flash
 
 # -------------------------------
 # Configuración Flask-Login
 # -------------------------------
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = "login"
+login_manager.login_view = "login"  # Si no está logueado, redirige a /login
 
 @login_manager.user_loader
 def load_user(user_id):
+    # Flask-Login necesita esta función para cargar un usuario por su ID
     return obtener_usuario(int(user_id))
 
 # -------------------------------
@@ -29,8 +35,7 @@ def load_user(user_id):
 # -------------------------------
 @app.route('/')
 def index():
-    productos = listar_productos()
-    return render_template("index.html", productos=productos)
+    return render_template("index.html")
 
 @app.route('/about')
 def about():
@@ -42,33 +47,38 @@ def about():
 @app.route('/productos')
 @login_required
 def listar_productos_view():
+    # Obtiene todos los productos de la BD
     productos = listar_productos()
+    # Renderiza la plantilla con la lista
     return render_template("productos.html", productos=productos)
 
-@app.route('/productos/crear', methods=["GET", "POST"])
+@app.route('/productos/crear', methods=["POST"])
 @login_required
 def crear_producto_view():
-    form = ProductoForm()
-    if form.validate_on_submit():
-        nuevo = Producto(nombre=form.nombre.data, precio=form.precio.data, stock=form.stock.data)
-        crear_producto(nuevo)
-        flash("Producto creado correctamente")
-        return redirect(url_for("listar_productos_view"))
-    return render_template("producto_form.html", form=form)
+    # Recibe datos del formulario HTML
+    nombre = request.form["nombre"]
+    precio = request.form["precio"]
+    stock = request.form["stock"]
+
+    # Crea un objeto Producto y lo guarda
+    nuevo = Producto(nombre=nombre, precio=precio, stock=stock)
+    crear_producto(nuevo)
+
+    flash("Producto creado correctamente")
+    return redirect(url_for("listar_productos_view"))
 
 @app.route('/productos/editar/<int:id>', methods=["GET", "POST"])
 @login_required
 def editar_producto_view(id):
     producto = obtener_producto(id)
-    form = ProductoForm(obj=producto)
-    if form.validate_on_submit():
-        producto.nombre = form.nombre.data
-        producto.precio = form.precio.data
-        producto.stock = form.stock.data
+    if request.method == "POST":
+        producto.nombre = request.form["nombre"]
+        producto.precio = request.form["precio"]
+        producto.stock = request.form["stock"]
         actualizar_producto(producto)
         flash("Producto actualizado correctamente")
         return redirect(url_for("listar_productos_view"))
-    return render_template("producto_form.html", form=form)
+    return render_template("producto_form.html", producto=producto)
 
 @app.route('/productos/eliminar/<int:id>', methods=["POST"])
 @login_required
@@ -132,8 +142,12 @@ def login():
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
+
+        # Busca el usuario en la BD
         usuarios = listar_usuarios()
         usuario = next((u for u in usuarios if u.email == email), None)
+
+        # Verifica contraseña
         if usuario and check_password_hash(usuario.password, password):
             login_user(usuario)
             flash("Inicio de sesión exitoso")

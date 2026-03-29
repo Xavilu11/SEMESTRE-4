@@ -1,39 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Usuarios</title>
-</head>
-<body>
-    <h1>Lista de Usuarios</h1>
+{% extends "base.html" %}
 
-    <!-- Tabla para mostrar usuarios -->
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Mail</th>
-            <th>Password</th>
-        </tr>
-        {% for u in usuarios %}
-        <tr>
-            <td>{{ u.id_usuario }}</td>
-            <td>{{ u.nombre }}</td>
-            <td>{{ u.mail }}</td>
-            <td>{{ u.password }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+{% block title %}Usuarios - Harta Pinta{% endblock %}
 
-    <!-- Formulario para agregar usuarios -->
-    <h2>Agregar Usuario</h2>
-    <form action="{{ url_for('add_usuario') }}" method="POST">
-        <label>Nombre:</label>
-        <input type="text" name="nombre" required><br>
-        <label>Mail:</label>
-        <input type="email" name="mail" required><br>
-        <label>Password:</label>
-        <input type="password" name="password" required><br>
-        <button type="submit">Guardar</button>
-    </form>
-</body>
-</html>
+{% block content %}
+  <h2>Lista de Usuarios</h2>
+
+  <!-- Tabla que muestra todos los usuarios -->
+  <table border="1" cellpadding="5" cellspacing="0">
+      <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Acciones</th>
+      </tr>
+      {% for usuario in usuarios %}
+      <tr>
+          <td>{{ usuario.id_usuario }}</td>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>
+              <!-- Botón para editar -->
+              <a href="{{ url_for('edit_usuario', id=usuario.id_usuario) }}" class="btn btn-warning">Editar</a>
+              <!-- Botón para eliminar -->
+              <form action="{{ url_for('delete_usuario_view', id=usuario.id_usuario) }}" method="post" style="display:inline;">
+                  <button type="submit" class="btn btn-danger">Eliminar</button>
+              </form>
+          </td>
+      </tr>
+      {% endfor %}
+  </table>
+
+  <!-- Formulario para añadir un nuevo usuario -->
+  <h3>Añadir nuevo usuario</h3>
+  <form action="{{ url_for('add_usuario') }}" method="post">
+      <p>Nombre: <input type="text" name="nombre" size="40"></p>
+      <p>Email: <input type="text" name="email" size="40"></p>
+      <p>Contraseña: <input type="password" name="password" size="20"></p>
+      <p><input type="submit" value="Guardar usuario"></p>
+  </form>
+{% endblock %}

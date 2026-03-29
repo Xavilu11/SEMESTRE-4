@@ -5,42 +5,34 @@
 {% block content %}
   <h2 class="mb-4">Formulario de Producto</h2>
 
-  <!-- Formulario con Flask-WTF -->
-  <!-- El objeto 'form' viene desde ProductoForm en forms/producto_form.py -->
+  <!-- Formulario HTML puro -->
+  <!-- Este formulario sirve tanto para crear como para editar productos -->
   <form method="POST">
-      {{ form.hidden_tag() }} <!-- Token CSRF para seguridad -->
-
       <!-- Campo Nombre -->
       <div class="mb-3">
-          {{ form.nombre.label(class="form-label") }}
-          {{ form.nombre(class="form-control") }}
-          {% for error in form.nombre.errors %}
-              <div class="text-danger">{{ error }}</div>
-          {% endfor %}
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" id="nombre" name="nombre" class="form-control" 
+                 value="{{ producto.nombre if producto else '' }}">
       </div>
 
       <!-- Campo Precio -->
       <div class="mb-3">
-          {{ form.precio.label(class="form-label") }}
-          {{ form.precio(class="form-control") }}
-          {% for error in form.precio.errors %}
-              <div class="text-danger">{{ error }}</div>
-          {% endfor %}
+          <label for="precio" class="form-label">Precio</label>
+          <input type="text" id="precio" name="precio" class="form-control" 
+                 value="{{ producto.precio if producto else '' }}">
       </div>
 
       <!-- Campo Stock -->
       <div class="mb-3">
-          {{ form.stock.label(class="form-label") }}
-          {{ form.stock(class="form-control") }}
-          {% for error in form.stock.errors %}
-              <div class="text-danger">{{ error }}</div>
-          {% endfor %}
+          <label for="stock" class="form-label">Stock</label>
+          <input type="text" id="stock" name="stock" class="form-control" 
+                 value="{{ producto.stock if producto else '' }}">
       </div>
 
       <!-- Botones -->
       <div class="mb-3">
-          {{ form.submit(class="btn btn-success") }}
-          <a href="{{ url_for('listar_productos') }}" class="btn btn-secondary">Cancelar</a>
+          <button type="submit" class="btn btn-success">Guardar</button>
+          <a href="{{ url_for('listar_productos_view') }}" class="btn btn-secondary">Cancelar</a>
       </div>
   </form>
 {% endblock %}
